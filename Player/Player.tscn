@@ -1,0 +1,159 @@
+[gd_scene load_steps=15 format=3 uid="uid://bf86dvq7mbt45"]
+
+[ext_resource type="Script" path="res://Player/Player.gd" id="1_yy0kq"]
+[ext_resource type="Texture2D" uid="uid://dpvy1k8rbnh2h" path="res://Player/Sprite/pixil-frame-1(1).png" id="2_k0485"]
+[ext_resource type="Texture2D" uid="uid://doc2g363a6fad" path="res://Player/Sprite/pixil-frame-1.png" id="3_k3x6w"]
+[ext_resource type="Texture2D" uid="uid://i74ajxoomhdx" path="res://Player/Sprite/pixil-frame-0(1).png" id="4_03g62"]
+[ext_resource type="Texture2D" uid="uid://clvh6ncu1m5v4" path="res://Player/Sprite/pixil-frame-0(2).png" id="5_2tt02"]
+[ext_resource type="Texture2D" uid="uid://v1e5p0jl2fmq" path="res://Player/Sprite/pixil-frame-0.png" id="6_tlmu7"]
+[ext_resource type="Texture2D" uid="uid://dv6u7roryas03" path="res://Player/Sprite/pixil-frame-1(2).png" id="7_71pr1"]
+[ext_resource type="Texture2D" uid="uid://d3d5nksaj7s4n" path="res://Player/Sprite/pixil-frame-0(3).png" id="8_mqbjq"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_87epr"]
+radius = 6.0
+height = 16.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cd3ua"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_k0485")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_k3x6w")
+}],
+"loop": true,
+"name": &"Charge",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_03g62")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_2tt02")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_tlmu7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_2tt02")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_71pr1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_mqbjq")
+}],
+"loop": true,
+"name": &"Jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_tlmu7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_2tt02")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_03g62")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_2tt02")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 10.0
+}]
+
+[sub_resource type="Animation" id="Animation_8sebp"]
+resource_name = "Run"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Run"]
+}
+
+[sub_resource type="Animation" id="Animation_q8xhq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Run"]
+}
+
+[sub_resource type="Animation" id="Animation_7fsu7"]
+resource_name = "Idle"
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:sprite_frames")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("SpriteFrames_cd3ua")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.25),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p7og8"]
+_data = {
+"Idle": SubResource("Animation_7fsu7"),
+"RESET": SubResource("Animation_q8xhq"),
+"Run": SubResource("Animation_8sebp")
+}
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_yy0kq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_87epr")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -2)
+sprite_frames = SubResource("SpriteFrames_cd3ua")
+animation = &"Run"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.9, 1.9)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_p7og8")
+}
