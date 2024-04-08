@@ -31,7 +31,7 @@ position = Vector2(1218, 318)
 shape = SubResource("RectangleShape2D_pqlih")
 
 [node name="Panel" type="Panel" parent="."]
-offset_left = -266.0
+offset_left = -58.0
 offset_top = 629.0
-offset_right = 1521.0
-offset_bottom = 980.0
+offset_right = 1259.0
+offset_bottom = 871.0

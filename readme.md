@@ -1,3 +1,6 @@
+# 08/04/2024
+Jätteseg idag, har fått en svag hjärnskakning så blev inte mycket gjort men jag fixade lite grejer med animationerna, så dom funkar, dom ser inte bra ut, men dom funkar, nästa gång borde jag se till så att jag kan aktivera animationerna.
+
 # 25/03/2024
 Jag fixade fler animationer och gjorde så att slimen(spelaren) kunde gå runt, inte så bra men den kan iallafall röra sig och hoppa, jag har dock vältigt mycket problem med animationerna och är alderles för hungrig för att förstå vad som är fel, jag åt dock nyss lunch så vet inte varför jag är så hungrig.
 
