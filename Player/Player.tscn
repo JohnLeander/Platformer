@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bf86dvq7mbt45"]
+[gd_scene load_steps=16 format=3 uid="uid://bf86dvq7mbt45"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_yy0kq"]
 [ext_resource type="Texture2D" uid="uid://dpvy1k8rbnh2h" path="res://Player/Sprite/pixil-frame-1(1).png" id="2_k0485"]
@@ -74,18 +74,19 @@ animations = [{
 
 [sub_resource type="Animation" id="Animation_7fsu7"]
 resource_name = "Idle"
+loop_mode = 1
 step = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:sprite_frames")
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(1),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [SubResource("SpriteFrames_cd3ua")]
+"values": [&"Idle"]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -94,29 +95,16 @@ tracks/1/path = NodePath("AnimatedSprite2D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.25),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_q8xhq"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"Run"]
+"values": [0, 1, 2, 3]
 }
 
 [sub_resource type="Animation" id="Animation_8sebp"]
 resource_name = "Run"
+length = 0.4
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -129,11 +117,84 @@ tracks/0/keys = {
 "update": 1,
 "values": [&"Run"]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_dqkw0"]
+resource_name = "Charge"
+length = 0.35
+loop_mode = 1
+step = 0.175
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Charge"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.175),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_fohnp"]
+resource_name = "Jump"
+length = 0.35
+loop_mode = 1
+step = 0.175
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.175),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Jump"]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_p7og8"]
 _data = {
+"Charge": SubResource("Animation_dqkw0"),
 "Idle": SubResource("Animation_7fsu7"),
-"RESET": SubResource("Animation_q8xhq"),
+"Jump": SubResource("Animation_fohnp"),
 "Run": SubResource("Animation_8sebp")
 }
 
@@ -149,6 +210,7 @@ texture_filter = 1
 position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_cd3ua")
 animation = &"Run"
+frame = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.9, 1.9)

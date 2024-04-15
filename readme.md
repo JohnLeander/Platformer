@@ -1,3 +1,6 @@
+# 11/94/2024
+Märkte att animationerna var konstiga och märkte att jag hade glömt att specifiera vart den skulle ta alla bildfilerna ifrån så fick fixa så den tog från rätt bibliotek, vilket gjorde att jag behöde göra om typ alla animationer och felsöka en stund. Men jag löste det iallafall.
+
 # 08/04/2024
 Jätteseg idag, har fått en svag hjärnskakning så blev inte mycket gjort men jag fixade lite grejer med animationerna, så dom funkar, dom ser inte bra ut, men dom funkar, nästa gång borde jag se till så att jag kan aktivera animationerna.
 
